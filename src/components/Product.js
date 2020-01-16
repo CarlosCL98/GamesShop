@@ -24,7 +24,9 @@ export default class Product extends React.Component {
     });
     return (
       <div className="card">
-        <img src={this.state.image} className="card-img-top" alt="Product"/>
+        <div className={"card-image"}>
+          <img src={this.state.image} className="card-img-top" alt="Product"/>
+        </div>
         <div className="card-body">
           <h5 className="card-title">{this.state.name}</h5>
           <p className="card-text"><strong>Precio:</strong> {formatter.format(this.state.price)}</p>

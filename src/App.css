@@ -48,6 +48,12 @@ main {
   grid-row-gap: 30px;
 }
 
+.card .card-image {
+  width: 75%;
+  height: 38vh;
+  align-self: center;
+}
+
 .table {
   margin-top: 5%;
 }
