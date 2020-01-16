@@ -9,7 +9,6 @@ export default class ShoppingCart extends React.Component {
       shoppingCart: this.props.location.state.shoppingCart ? this.props.location.state.shoppingCart : [],
       amount: this.props.location.state.amount ? this.props.location.state.amount : 0,
       merchantId: "508029",
-      referenceCode: "GamesShopPayU10",
       currency: "COP",
       tax: 0,
       taxReturnBase: 0
@@ -17,6 +16,10 @@ export default class ShoppingCart extends React.Component {
   }
 
   render() {
+    let d = new Date();
+    d = new Date(d.getTime() - 3000000);
+    const reference_code = d.getFullYear().toString()+"-"+((d.getMonth()+1).toString().length==2?(d.getMonth()+1).toString():"0"+(d.getMonth()+1).toString())+"-"+(d.getDate().toString().length==2?d.getDate().toString():"0"+d.getDate().toString())+" "+(d.getHours().toString().length==2?d.getHours().toString():"0"+d.getHours().toString())+":"+((parseInt(d.getMinutes()/5)*5).toString().length==2?(parseInt(d.getMinutes()/5)*5).toString():"0"+(parseInt(d.getMinutes()/5)*5).toString())+":00";
+    console.log(reference_code);
     const formatter = new Intl.NumberFormat('es-CO', {
       style: 'currency',
       currency: 'COP',
@@ -84,13 +87,13 @@ export default class ShoppingCart extends React.Component {
                 <input name="merchantId" type="hidden" value={this.state.merchantId}/>
                 <input name="accountId" type="hidden" value="512327"/> {/*accountId of Brasil*/}
                 <input name="description" type="hidden" value="Games Shop PayU"/>
-                <input name="referenceCode" type="hidden" value={this.state.referenceCode}/>
+                <input name="referenceCode" type="hidden" value={reference_code}/>
                 <input name="amount" type="hidden" value={totalAmount}/>
                 <input name="tax" type="hidden" value={this.state.tax}/>
                 <input name="taxReturnBase" type="hidden" value={this.state.taxReturnBase}/>
                 <input name="currency" type="hidden" value={this.state.currency}/>
                 <input name="signature" type="hidden"
-                       value={md5("4Vj8eK4rloUd272L48hsrarnUA~" + this.state.merchantId + "~" + this.state.referenceCode + "~" + totalAmount + "~" + this.state.currency)}/> {/*ApiKey~merchantId~referenceCode~amount~currency*/}
+                       value={md5("4Vj8eK4rloUd272L48hsrarnUA~" + this.state.merchantId + "~" + reference_code + "~" + totalAmount + "~" + this.state.currency)}/> {/*ApiKey~merchantId~referenceCode~amount~currency*/}
                 <input name="test" type="hidden" value="1"/>
                 <input name="buyerEmail" type="hidden" value="carlosandresmedinarivas14@gmail.com"/>
                 <input name="responseUrl" type="hidden" value="http://ec2-54-197-75-223.compute-1.amazonaws.com/response.php"/>
